@@ -37,7 +37,13 @@ class CountryServiceImpl(
     }
 
     override fun update(id: Int, dto: CountryDTO) {
-        TODO("Not yet implemented")
+        val existence = countryRepository.findByIdOrNull(id) ?:throw RuntimeException("Country not found!")
+
+        existence.name = dto.name
+        existence.population = dto.population
+
+        countryRepository.save(existence)
+
     }
 
     override fun delete(id: Int) {
