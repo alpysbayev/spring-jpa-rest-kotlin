@@ -47,7 +47,9 @@ class CountryServiceImpl(
     }
 
     override fun delete(id: Int) {
-        TODO("Not yet implemented")
+        val existence = countryRepository.findByIdOrNull(id) ?:throw RuntimeException("Country not found!")
+
+        countryRepository.deleteById(existence.id)
     }
 
     override fun searchByPart(part: String): List<CountryDTO> {
