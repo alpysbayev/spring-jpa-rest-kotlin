@@ -3,8 +3,12 @@ package com.example.controller
 import org.springframework.web.bind.annotation.RestController
 import com.example.dto.CountryDTO
 import com.example.service.CountryService
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 
@@ -28,4 +32,20 @@ class CountryController(
 
     @GetMapping("/search-by-part")
     fun searchCountriesByPart(@RequestParam("part") part: String): List<CountryDTO> = countryService.searchByPart(part)
+
+    @PostMapping
+    fun create(@RequestBody dto: CountryDTO): Int { //@RequestBody - говорит о том что все входные данные будут в теле запроса а не в URL
+        return countryService.create(dto)
+    }
+
+    @PutMapping("/{id}")
+    fun update(@PathVariable id: Int,
+               @RequestBody dto: CountryDTO) {
+        countryService.update(id, dto)
+    }
+
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable id: Int) {
+        countryService.delete(id)
+    }
 }

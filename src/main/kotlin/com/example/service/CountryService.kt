@@ -13,4 +13,10 @@ interface CountryService {
     fun searchByPrefix(prefix: String): List<CountryDTO>
 
     fun searchByPart(part: String): List<CountryDTO>
+
+    fun create(dto: CountryDTO): Int
+
+    fun update(id: Int, dto: CountryDTO)
+
+    fun delete(id: Int)
 }

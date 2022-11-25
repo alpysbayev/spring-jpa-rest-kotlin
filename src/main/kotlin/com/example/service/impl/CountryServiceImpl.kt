@@ -32,12 +32,30 @@ class CountryServiceImpl(
         return countryRepository.findByNameStartsWithIgnoreCaseOrderByName(prefix).map { it.toDTO() }
     }
 
+    override fun create(dto: CountryDTO): Int {
+        return countryRepository.save(dto.toEntity()).id
+    }
+
+    override fun update(id: Int, dto: CountryDTO) {
+        TODO("Not yet implemented")
+    }
+
+    override fun delete(id: Int) {
+        TODO("Not yet implemented")
+    }
+
     override fun searchByPart(part: String): List<CountryDTO> {
         return countryRepository.findByNameContainsIgnoreCaseOrderByName(part).map { it.toDTO() }
     }
 
     private fun CountryEntity.toDTO(): CountryDTO = CountryDTO(
                                                         id = this.id,
+                                                        name = this.name,
+                                                        population = this.population,
+                                                    )
+
+    private fun CountryDTO.toEntity(): CountryEntity = CountryEntity(
+                                                        id = 0,
                                                         name = this.name,
                                                         population = this.population,
                                                     )
