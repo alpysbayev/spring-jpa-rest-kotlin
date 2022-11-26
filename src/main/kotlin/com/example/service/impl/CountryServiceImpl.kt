@@ -2,6 +2,7 @@ package com.example.service.impl
 
 import com.example.dto.CountryDTO
 import com.example.entity.CountryEntity
+import com.example.exception.CountryNotFoundException
 import com.example.repository.CountryRepository
 import com.example.service.CountryService
 import org.springframework.data.domain.PageRequest
@@ -21,7 +22,7 @@ class CountryServiceImpl(
     override fun getById(id: Int): CountryDTO {
         return countryRepository.findByIdOrNull(id)
             ?.toDTO()
-            ?:throw RuntimeException("Country not found!")
+            ?:throw CountryNotFoundException(id)
     }
 
     override fun getByName(name: String): CountryDTO {
@@ -37,7 +38,7 @@ class CountryServiceImpl(
     }
 
     override fun update(id: Int, dto: CountryDTO) {
-        val existence = countryRepository.findByIdOrNull(id) ?:throw RuntimeException("Country not found!")
+        val existence = countryRepository.findByIdOrNull(id) ?:throw CountryNotFoundException(id)
 
         existence.name = dto.name
         existence.population = dto.population
@@ -47,7 +48,7 @@ class CountryServiceImpl(
     }
 
     override fun delete(id: Int) {
-        val existence = countryRepository.findByIdOrNull(id) ?:throw RuntimeException("Country not found!")
+        val existence = countryRepository.findByIdOrNull(id) ?:throw CountryNotFoundException(id)
 
         countryRepository.deleteById(existence.id)
     }
