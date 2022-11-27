@@ -30,7 +30,7 @@ class CountryServiceImpl(
     }
 
     override fun getAll(): List<CountryDTO> {
-        return countryRepository.findAllByOrderByName().map { it.toDTO() }
+        return countryRepository.findAllByOrderById().map { it.toDTO() }
     }
 
     override fun getNames(): List<String> {

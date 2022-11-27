@@ -1,6 +1,7 @@
 package com.example.repository
 
 import com.example.entity.CountryEntity
+import com.example.model.NameOnly
 import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.CrudRepository
 
@@ -15,5 +16,7 @@ interface CountryRepository: CrudRepository<CountryEntity, Int> {
 
     fun findByNameContainsIgnoreCaseOrderByName(part: String): List<CountryEntity>
 
-    fun findAllByOrderByName(): List<CountryEntity>
+    fun findAllByOrderById(): List<CountryEntity>
+
+    fun findAllByOrderByName(): List<NameOnly>
 }
