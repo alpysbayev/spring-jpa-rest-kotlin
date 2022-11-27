@@ -39,8 +39,7 @@ class CountryController(
     }
 
     @PutMapping("/{id}")
-    fun update(@PathVariable id: Int,
-               @RequestBody dto: CountryDTO) {
+    fun update(@PathVariable id: Int, @RequestBody dto: CountryDTO) {
         countryService.update(id, dto)
     }
 

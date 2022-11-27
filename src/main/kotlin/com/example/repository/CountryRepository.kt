@@ -15,5 +15,5 @@ interface CountryRepository: CrudRepository<CountryEntity, Int> {
 
     fun findByNameContainsIgnoreCaseOrderByName(part: String): List<CountryEntity>
 
-
+    
 }
