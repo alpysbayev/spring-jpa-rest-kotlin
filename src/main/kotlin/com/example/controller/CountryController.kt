@@ -19,7 +19,7 @@ class CountryController(
     private val countryService: CountryService,
 ) {
     @GetMapping
-    fun getAll(@RequestParam("page") pageIndex: Int): List<CountryDTO> = countryService.getAll(pageIndex)
+    fun getAll(@RequestParam("page") pageIndex: Int): List<CountryDTO> = countryService.getAllByPage(pageIndex)
 
     @GetMapping("/{id}")
     fun getById(@PathVariable("id") id: Int): CountryDTO = countryService.getById(id)
@@ -32,6 +32,12 @@ class CountryController(
 
     @GetMapping("/search-by-part")
     fun searchCountriesByPart(@RequestParam("part") part: String): List<CountryDTO> = countryService.searchByPart(part)
+
+    @GetMapping("/all")
+    fun getAllCountries(): List<CountryDTO> = countryService.getAll()
+
+    @GetMapping("/names")
+    fun getCountryNames(): List<String> = countryService.getNames()
 
     @PostMapping
     fun create(@RequestBody dto: CountryDTO): Int { //@RequestBody - говорит о том что все входные данные будут в теле запроса а не в URL

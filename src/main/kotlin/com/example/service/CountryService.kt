@@ -4,7 +4,11 @@ import com.example.dto.CountryDTO
 
 interface CountryService {
 
-    fun getAll(pageIndex: Int): List<CountryDTO>
+    fun getAllByPage(pageIndex: Int): List<CountryDTO>
+
+    fun getAll(): List<CountryDTO>
+
+    fun getNames(): List<String>
 
     fun getById(id: Int): CountryDTO
 

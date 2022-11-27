@@ -19,7 +19,7 @@ class CountryServiceImpl(
     private val cityRepository: CityRepository
 ) : CountryService {
 
-    override fun getAll(pageIndex: Int): List<CountryDTO> {
+    override fun getAllByPage(pageIndex: Int): List<CountryDTO> {
         return countryRepository.findByOrderByName(PageRequest.of(pageIndex, 2)).map { it.toDTO()}
     }
 
@@ -27,6 +27,14 @@ class CountryServiceImpl(
         return countryRepository.findByIdOrNull(id)
             ?.toDTO()
             ?:throw CountryNotFoundException(id)
+    }
+
+    override fun getAll(): List<CountryDTO> {
+        return countryRepository.findAllByOrderByName().map { it.toDTO() }
+    }
+
+    override fun getNames(): List<String> {
+        return countryRepository.findAllByOrderByName().map { it.name }
     }
 
     override fun getByName(name: String): CountryDTO {
